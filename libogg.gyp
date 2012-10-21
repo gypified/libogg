@@ -65,7 +65,7 @@
     {
       'target_name': 'test',
       'type': 'executable',
-      'dependencies': [ 'expat' ],
+      'dependencies': [ 'ogg' ],
       'sources': [ 'test.c' ]
     },
   ]
