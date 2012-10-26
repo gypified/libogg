@@ -7,6 +7,9 @@
 #   ./out/Debug/test
 
 {
+  'variables': {
+    'target_arch%': 'ia32', # built for a 32-bit CPU by default
+  },
   'target_defaults': {
     'default_configuration': 'Debug',
     'configurations': {
@@ -32,11 +35,18 @@
         'GenerateDebugInformation': 'true',
       },
     },
+    'conditions': [
+      ['OS=="mac"', {
+        'conditions': [
+          ['target_arch=="ia32"', { 'xcode_settings': { 'ARCHS': [ 'i386' ] } }],
+          ['target_arch=="x64"', { 'xcode_settings': { 'ARCHS': [ 'x86_64' ] } }]
+        ],
+      }],
+    ]
   },
 
   'targets': [
     {
-      'variables': { 'target_arch%': 'ia32' }, # default for node v0.6.x
       'target_name': 'ogg',
       'product_prefix': 'lib',
       'type': 'static_library',
