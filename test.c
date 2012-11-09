@@ -7,15 +7,14 @@
 #include "ogg/ogg.h"
 
 struct stream {
-  ogg_stream_state os;
+  ogg_stream_state os; /* take physical pages, weld into a logical
+                          stream of packets */
   int serialno;
   struct stream *next;
 };
 
 int main () {
   ogg_sync_state   oy; /* sync and verify incoming physical bitstream */
-  ogg_stream_state os; /* take physical pages, weld into a logical
-                          stream of packets */
   ogg_page         og; /* one Ogg bitstream page. Vorbis packets are inside */
   ogg_packet       op; /* one raw packet of data for decode */
 
@@ -23,8 +22,7 @@ int main () {
 
   int r;
   char *buffer;
-  int  bytes;
-  int eos = 0;
+  int bytes;
   int i;
   int bufferSize = 4096;
 
